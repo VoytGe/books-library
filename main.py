@@ -10,7 +10,7 @@ import os
 from boto.s3.connection import S3Connection
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = S3Connection(os.environ['APP_SECRET_KEY'])
+app.config['SECRET_KEY'] = S3Connection(os.getenv['APP_SECRET_KEY'])
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
