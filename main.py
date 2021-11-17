@@ -52,6 +52,31 @@ def length(min_len, max_len):
     return _length
 
 
+def custom_year(start_year, end_year):
+    year = start_year
+    if start_year == "":
+        year = end_year
+    return int(year)
+
+
+def get_search_data(book_qry):
+    title = book_qry.get("title")
+    author = book_qry.get("author")
+    lang = book_qry.get("lang")
+    year_from = custom_year(start_year=book_qry.get("from", 1000), end_year=1000)
+    if year_from == "":
+        year_from = 1000
+    year_to = custom_year(start_year=book_qry.get("to", TODAY_YEAR), end_year=TODAY_YEAR)
+    qry = db.session.query(Book)\
+        .filter(Book.title.contains(title))\
+        .filter(Book.author.contains(author))\
+        .filter(Book.language.contains(lang))\
+        .filter(Book.year >= year_from)\
+        .filter(Book.year <= year_to)\
+        .all()
+    return qry
+
+
 class ImportBookForm(FlaskForm):
     query = StringField("What do you search for:", validators=[DataRequired(), length(min_len=1, max_len=50)])
     filter = SelectField("Search in:", choices=["everywhere", "title", "author", "subject", "isbn", "lccn", "oclc"])
@@ -85,31 +110,6 @@ class SearchBook(FlaskForm):
 
 
 db.create_all()
-
-
-def custom_year(start_year, end_year):
-    year = start_year
-    if start_year == "":
-        year = end_year
-    return int(year)
-
-
-def get_search_data(book_qry):
-    title = book_qry.get("title")
-    author = book_qry.get("author")
-    lang = book_qry.get("lang")
-    year_from = custom_year(start_year=book_qry.get("from", 1000), end_year=1000)
-    if year_from == "":
-        year_from = 1000
-    year_to = custom_year(start_year=book_qry.get("to", TODAY_YEAR), end_year=TODAY_YEAR)
-    qry = db.session.query(Book)\
-        .filter(Book.title.contains(title))\
-        .filter(Book.author.contains(author))\
-        .filter(Book.language.contains(lang))\
-        .filter(Book.year >= year_from)\
-        .filter(Book.year <= year_to)\
-        .all()
-    return qry
 
 
 @app.route("/")
