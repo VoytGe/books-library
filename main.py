@@ -8,7 +8,7 @@ import requests
 import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = APP_SECRET_KEY
+app.config['SECRET_KEY'] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
