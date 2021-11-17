@@ -108,7 +108,7 @@ def get_search_data(book_qry):
     return qry
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
     if request.args:
         lib_books = get_search_data(request.args)
@@ -117,7 +117,7 @@ def home():
     return render_template("index.html", books=lib_books)
 
 
-@app.route("/search")
+@app.route("/search", methods=["GET"])
 def search_book():
     books = get_search_data(request.args)
     if books:
