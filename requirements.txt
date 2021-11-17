@@ -13,3 +13,4 @@ WTForms==3.0.0
 gunicorn==20.1.0
 requests==2.26.0
 datetime==4.3
+boto==2.49.0
