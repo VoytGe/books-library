@@ -8,7 +8,7 @@ import requests
 import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = APP_SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -180,7 +180,7 @@ def import_book():
             qry = f"+{filter_field}:{text_field}"
 
         parameters = {
-            "key": "AIzaSyDe7j8Fuk0ffmNDzYPyCOsOhhpKeSnqD2Q",
+            "key": GOOGLE_BOOKS_API_KEY,
             "maxResults": 40,
             "q": qry
         }
@@ -198,7 +198,7 @@ def import_book():
 @app.route("/find/<book_id>", methods=["GET", "POST"])
 def find_book(book_id):
     response = requests.get(url=f"https://www.googleapis.com/books/v1/volumes/{book_id}",
-                            params={"key": "AIzaSyDe7j8Fuk0ffmNDzYPyCOsOhhpKeSnqD2Q"})
+                            params={"key": GOOGLE_BOOKS_API_KEY})
     data = response.json()["volumeInfo"]
 
     if Book.query.filter_by(title=data["title"]).first():
