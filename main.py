@@ -198,10 +198,7 @@ def import_book():
 @app.route("/find/<book_id>", methods=["GET", "POST"])
 def find_book(book_id):
     response = requests.get(url=f"https://www.googleapis.com/books/v1/volumes/{book_id}",
-                            params={
-                                "key": "AIzaSyDe7j8Fuk0ffmNDzYPyCOsOhhpKeSnqD2Q",
-                                "maxResults": 40
-                            })
+                            params={"key": "AIzaSyDe7j8Fuk0ffmNDzYPyCOsOhhpKeSnqD2Q"})
     data = response.json()["volumeInfo"]
 
     if Book.query.filter_by(title=data["title"]).first():
