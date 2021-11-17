@@ -21,26 +21,6 @@ Bootstrap(app)
 TODAY_YEAR = datetime.datetime.today().year
 
 
-class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), unique=True, nullable=False)
-    author = db.Column(db.String(100), nullable=True)
-    year = db.Column(db.Integer, nullable=True)
-    isbn_no = db.Column(db.Integer, nullable=True)
-    pages = db.Column(db.Integer, nullable=True)
-    img_url = db.Column(db.String(250), nullable=True)
-    language = db.Column(db.String(2), nullable=True)
-
-    def __repr__(self):
-        return f'<Book {self.title}>'
-
-    def to_dict(self):
-        dictionary = {}
-        for column in self.__table__.columns:
-            dictionary[column.name] = getattr(self, column.name)
-        return dictionary
-
-
 def length(min_len, max_len):
     message = f'Must include at least {min_len} characters and less than {max_len}'
 
@@ -75,6 +55,26 @@ def get_search_data(book_qry):
         .filter(Book.year <= year_to)\
         .all()
     return qry
+
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), unique=True, nullable=False)
+    author = db.Column(db.String(100), nullable=True)
+    year = db.Column(db.Integer, nullable=True)
+    isbn_no = db.Column(db.Integer, nullable=True)
+    pages = db.Column(db.Integer, nullable=True)
+    img_url = db.Column(db.String(250), nullable=True)
+    language = db.Column(db.String(2), nullable=True)
+
+    def __repr__(self):
+        return f'<Book {self.title}>'
+
+    def to_dict(self):
+        dictionary = {}
+        for column in self.__table__.columns:
+            dictionary[column.name] = getattr(self, column.name)
+        return dictionary
 
 
 class ImportBookForm(FlaskForm):
