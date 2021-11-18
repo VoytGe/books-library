@@ -17,49 +17,49 @@
             {{ form.hidden_tag() }}
             <p>
                 {{ form.title.label }}<br>
-                {{ form.title(style='width: 100px;') }}<br>
+                {{ form.title(style='width: 200px;') }}<br>
                 {% for error in form.title.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.author.label }}<br>
-                {{ form.author(style='width: 100px;') }}<br>
+                {{ form.author(style='width: 200px;') }}<br>
                 {% for error in form.author.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.year.label }}<br>
-                {{ form.year(style='width: 100px;') }}<br>
+                {{ form.year(style='width: 200px;') }}<br>
                 {% for error in form.year.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.isbn_no.label }}<br>
-                {{ form.isbn_no(style='width: 100px;') }}<br>
+                {{ form.isbn_no(style='width: 200px;') }}<br>
                 {% for error in form.isbn_no.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.pages.label }}<br>
-                {{ form.pages(style='width: 100px;') }}<br>
+                {{ form.pages(style='width: 200px;') }}<br>
                 {% for error in form.pages.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.img_url.label }}<br>
-                {{ form.img_url(style='width: 100px;') }}<br>
+                {{ form.img_url(style='width: 200px;') }}<br>
                 {% for error in form.img_url.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
                 {{ form.language.label }}<br>
-                {{ form.language(style='width: 100px;') }}<br>
+                {{ form.language(style='width: 200px;') }}<br>
                 {% for error in form.language.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
