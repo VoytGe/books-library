@@ -1,0 +1,75 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Add/Edit Book{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Add/Edit a Book</h1>
+    <div>
+        <form class="container text-center add" action="{{ url_for('add_book') }}" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.title.label }}<br>
+                {{ form.title(style='width: 200px;') }}<br>
+                {% for error in form.title.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.author.label }}<br>
+                {{ form.author(style='width: 200px;') }}<br>
+                {% for error in form.author.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.year.label }}<br>
+                {{ form.year(style='width: 200px;') }}<br>
+                {% for error in form.year.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.isbn_no.label }}<br>
+                {{ form.isbn_no(style='width: 200px;') }}<br>
+                {% for error in form.isbn_no.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.pages.label }}<br>
+                {{ form.pages(style='width: 200px;') }}<br>
+                {% for error in form.pages.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.img_url.label }}<br>
+                {{ form.img_url(style='width: 200px;') }}<br>
+                {% for error in form.img_url.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.language.label }}<br>
+                {{ form.language(style='width: 200px;') }}<br>
+                {% for error in form.language.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <input type="submit" value="Add/Edit Book" class="button">
+        </form>
+    </div>
+</div>
+<div class="container text-center add">
+    <a href="{{ url_for('import_book') }}" class="button">Import a new book</a>
+    <a href="{{ url_for('home') }}" class="button delete-button">Back to Home Page</a>
+</div>
+{% endblock %}
