@@ -102,7 +102,6 @@ class Book(db.Model):
 class ImportBookForm(FlaskForm):
     query = StringField("What do you search for:", validators=[DataRequired(), length(min_len=1, max_len=50)])
     filter = SelectField("Search in:", choices=["everywhere", "title", "author", "subject", "isbn", "lccn", "oclc"])
-    submit = SubmitField("Search")
 
 
 class AddBook(FlaskForm):
@@ -119,16 +118,6 @@ class AddBook(FlaskForm):
                                                      NumberRange(min=1, max=100000)])
     img_url = StringField("Cover image", validators=[DataRequired(), URL()])
     language = StringField("Language", validators=[DataRequired(), length(min_len=2, max_len=2)])
-    submit = SubmitField("Add/Edit Book")
-
-
-class SearchBook(FlaskForm):
-    title = StringField()
-    author = StringField()
-    language = StringField()
-    year_from = IntegerField()
-    year_to = IntegerField()
-    submit = SubmitField("Add/Edit Book")
 
 
 #########################
