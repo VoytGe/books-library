@@ -25,8 +25,8 @@ def length(min_len, max_len):
     message = f'Must include at least {min_len} characters and less than {max_len}'
 
     def _length(form, field):
-        l = field.data and len(str(field.data)) or 0
-        if l < min_len or l > max_len:
+        field_len = field.data and len(str(field.data)) or 0
+        if field_len < min_len or field_len > max_len:
             raise ValidationError(message)
 
     return _length
