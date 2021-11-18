@@ -13,7 +13,7 @@
 <div class="content">
     <h1 class="heading">Import a new book</h1>
     <p class="description">Find your book</p>
-    <form action="{{ url_for('import_book') }}" method="post">
+    <form action="{{ url_for('import_book') }}" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.query.label }}<br>
