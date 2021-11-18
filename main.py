@@ -9,8 +9,12 @@ import datetime
 import os
 from boto.s3.connection import S3Connection
 
-conn = S3Connection(os.environ['APP_SECRET_KEY'], os.environ['GOOGLE_BOOKS_API_KEY'])
 
+#######################
+#### Configuration ####
+#######################
+
+conn = S3Connection(os.environ['APP_SECRET_KEY'], os.environ['GOOGLE_BOOKS_API_KEY'])
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-database.db'
@@ -18,8 +22,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Bootstrap(app)
 
+
+##########################
+#### Global variables ####
+##########################
+
 TODAY_YEAR = datetime.datetime.today().year
 
+
+##########################
+#### Helper Functions ####
+##########################
 
 def length(min_len, max_len):
     message = f'Must include at least {min_len} characters and less than {max_len}'
@@ -57,6 +70,11 @@ def get_search_data(book_qry):
     return qry
 
 
+#####################
+#### Model Class ####
+#####################
+
+
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
@@ -76,6 +94,10 @@ class Book(db.Model):
             dictionary[column.name] = getattr(self, column.name)
         return dictionary
 
+    
+####################
+#### Forms Used ####
+####################
 
 class ImportBookForm(FlaskForm):
     query = StringField("What do you search for:", validators=[DataRequired(), length(min_len=1, max_len=50)])
@@ -109,8 +131,16 @@ class SearchBook(FlaskForm):
     submit = SubmitField("Add/Edit Book")
 
 
+#########################
+#### Create database ####
+#########################
+
 db.create_all()
 
+
+###################
+#### Endpoints ####
+###################
 
 @app.route("/")
 def home():
