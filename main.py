@@ -233,7 +233,7 @@ def find_book(book_id):
         new_book = Book(
             title=data.get("title").title(),
             author=data.get("authors")[0].title(),
-            year=data.get("publishedDate").split("-")[0],
+            year=data.get("publishedDate", '').split("-")[0],
             isbn_no=isbn_no[0],
             pages=data.get("pageCount"),
             img_url=data.get("imageLinks").get("smallThumbnail"),
