@@ -236,6 +236,11 @@ def find_book(book_id):
                        isbn.get('type') == 'ISBN_13']
         else:
             isbn_no = ['Not found']
+            
+        if data.get("imageLinks"):
+            img = data.get("imageLinks").get("smallThumbnail", 'No image')
+        else:
+            img = "Not found"
 
         new_book = Book(
             title=data.get("title"),
@@ -243,7 +248,7 @@ def find_book(book_id):
             year=data.get("publishedDate", 'Unknown').split("-")[0],
             isbn_no=isbn_no[0],
             pages=data.get("pageCount"),
-            img_url=data.get("imageLinks", 'No image').get("smallThumbnail", 'No image'),
+            img_url=img,
             language=data.get("language")
         )
 
