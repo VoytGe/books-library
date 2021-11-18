@@ -228,7 +228,7 @@ def find_book(book_id):
         msg = "The book is already in the library."
         return render_template("notification.html", msg=msg)
     else:
-        isbn_no = [isbn.get('identifier', 0) for isbn in data.get("industryIdentifiers") if isbn.get('type') == 'ISBN_13']
+        isbn_no = [isbn.get('identifier', 0) for isbn in data.get("industryIdentifiers", 0) if isbn.get('type', 0) == 'ISBN_13']
 
         new_book = Book(
             title=data.get("title"),
