@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask_script import Manager
+from app import create_app
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField
+from wtforms import StringField, IntegerField, SelectField
 from wtforms.validators import DataRequired, NumberRange, URL, ValidationError
 import requests
 import datetime
@@ -15,7 +17,8 @@ from boto.s3.connection import S3Connection
 #######################
 
 conn = S3Connection(os.environ['APP_SECRET_KEY'], os.environ['GOOGLE_BOOKS_API_KEY'])
-app = Flask(__name__)
+bp = Blueprint('myapp', __name__)
+app = create_app()
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -249,5 +252,8 @@ def find_book(book_id):
         return redirect(url_for("home"))
 
 
+manager = Manager(create_app)
+manager.add_option('-c', '--config', dest='config', required=False)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
