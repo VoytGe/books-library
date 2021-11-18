@@ -17,14 +17,14 @@
         {{ form.hidden_tag() }}
         <p>
             {{ form.query.label }}<br>
-            {{ form.query }}<br>
+            {{ form.query(style='width: 200px;') }}<br>
             {% for error in form.query.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
             {{ form.filter.label }}<br>
-            {{ form.filter }}<br>
+            {{ form.filter(style='width: 200px; height: 10px;') }}<br>
             {% for error in form.filter.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
