@@ -236,7 +236,7 @@ def find_book(book_id):
             year=data.get("publishedDate", '').split("-")[0],
             isbn_no=isbn_no[0],
             pages=data.get("pageCount"),
-            img_url=data.get("imageLinks").get("smallThumbnail"),
+            img_url=data.get("imageLinks", 'No image').get("smallThumbnail", 'No image'),
             language=data.get("language")
         )
 
