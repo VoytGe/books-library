@@ -14,7 +14,59 @@
 <div class="content">
     <h1 class="heading">Add/Edit a Book</h1>
     <div>
-        {{ wtf.quick_form(form, novalidate=True) }}
+        <form class="container text-center add" action="{{ url_for('add_book') }}" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.title.label }}<br>
+                {{ form.title }}<br>
+                {% for error in form.title.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.author.label }}<br>
+                {{ form.author }}<br>
+                {% for error in form.author.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.year.label }}<br>
+                {{ form.year }}<br>
+                {% for error in form.year.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.isbn_no.label }}<br>
+                {{ form.isbn_no }}<br>
+                {% for error in form.isbn_no.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.pages.label }}<br>
+                {{ form.pages }}<br>
+                {% for error in form.pages.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.img_url.label }}<br>
+                {{ form.img_url }}<br>
+                {% for error in form.img_url.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.language.label }}<br>
+                {{ form.language }}<br>
+                {% for error in form.language.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <input type="submit" value="Add/Edit Book" class="button">
+        </form>
     </div>
 </div>
 <div class="container text-center add">
@@ -22,5 +74,3 @@
     <a href="{{ url_for('home') }}" class="button delete-button">Back to Home Page</a>
 </div>
 {% endblock %}
-
-
